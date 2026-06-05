@@ -310,6 +310,36 @@ footer{background:#0d1a10;padding:3.5rem 2rem 2rem;}
   [style*="grid-template-columns:repeat(4,1fr)"] { grid-template-columns: 1fr 1fr !important; }
 }
 </style>
+
+<style>
+.avis-card{position:relative;overflow:hidden;}
+.avis-card p.avis-txt{display:-webkit-box;-webkit-line-clamp:3;-webkit-box-orient:vertical;overflow:hidden;transition:none;}
+.avis-card.expanded p.avis-txt{display:block;-webkit-line-clamp:unset;}
+.avis-toggle{display:flex;align-items:center;justify-content:center;gap:4px;margin-top:8px;background:none;border:none;cursor:pointer;font-size:.75rem;font-weight:600;color:#2d6a3f;font-family:inherit;padding:0;transition:opacity .18s;}
+.avis-toggle:hover{opacity:.7;}
+.avis-toggle svg{transition:transform .3s cubic-bezier(.22,1,.36,1);}
+.avis-card.expanded .avis-toggle svg{transform:rotate(180deg);}
+</style>
+<style>
+.carrousel-wrap{position:relative;overflow:hidden;}
+.carrousel-track{display:flex;gap:14px;transition:transform .45s cubic-bezier(.22,1,.36,1);will-change:transform;}
+.carrousel-track .hov.avis-card{flex:0 0 calc(33.333% - 10px);min-width:0;}
+.carrousel-btn{position:absolute;top:50%;transform:translateY(-50%);width:40px;height:40px;border-radius:50%;background:#fff;border:1.5px solid #e3ebe4;display:flex;align-items:center;justify-content:center;cursor:pointer;z-index:10;transition:all .2s;box-shadow:0 2px 12px rgba(0,0,0,.08);}
+.carrousel-btn:hover{background:#eaf4ed;border-color:#2d6a3f;}
+.carrousel-btn:disabled{opacity:.3;cursor:default;}
+.carrousel-btn svg{flex-shrink:0;}
+.carrousel-prev{left:-20px;}
+.carrousel-next{right:-20px;}
+/* Enlever l'ancien expand */
+.avis-toggle{display:none!important;}
+.avis-txt{display:block!important;-webkit-line-clamp:unset!important;overflow:visible!important;}
+@media(max-width:768px){
+  .carrousel-wrap{overflow:visible;padding:0!important;}
+  .carrousel-track{flex-direction:column;transform:none!important;transition:none;gap:10px;}
+  .carrousel-track .hov.avis-card{flex:0 0 auto;width:100%;}
+  .carrousel-btn{display:none;}
+}
+</style>
 </head>
 <body style="padding-top:60px;">
 <header>
@@ -372,10 +402,38 @@ footer{background:#0d1a10;padding:3.5rem 2rem 2rem;}
       <div class="hov" data-r="x+" data-delay=".16" style="background:#f4faf6;border:1.5px solid #eaf4ed;border-radius:16px;padding:1.3rem;display:flex;gap:12px;align-items:flex-start;"><div style="width:42px;height:42px;background:#eaf4ed;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0;">💚</div><div><div style="font-size:.92rem;font-weight:600;color:#0d1a10;margin-bottom:.3rem;">Complicité maître-chien</div><p style="font-size:.82rem;color:#4a6450;line-height:1.65;">Une relation harmonieuse et durable avec votre compagnon.</p></div></div>
       <div class="hov avis-card" data-r="y" data-delay="0.24">
   <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
-  <p style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Club au top, équipe disponible, ambiance sympa — cela complète bien ce que j'apprends de mon côté."</p>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Club au top, équipe disponible, ambiance sympa — cela complète bien ce que j'apprends de mon côté."</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
     <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">EA</div>
     <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Emmanuelle & Aïko</div><div style="font-size:.73rem;color:#4a6450;">Adhérente depuis février 2026 🐾</div></div>
+  </div>
+</div>
+    <div class="hov avis-card" data-r="y" data-delay="0.32" style="background:#ffffff;border:1.5px solid #e3ebe4;">
+  <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Ma chienne avait peur de tout. Grâce au club, bien accompagnées par les éducateurs, aujourd'hui elle est bien dans ses pattes !"</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
+    <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">CO</div>
+    <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Camille & Ouragan</div><div style="font-size:.73rem;color:#4a6450;">Au club depuis 2 ans 🐾</div></div>
+  </div>
+</div>
+      <div class="hov avis-card" data-r="y" data-delay="0.4" style="background:#ffffff;border:1.5px solid #e3ebe4;">
+  <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"J'ai trouvé auprès de l'équipe du club canin du Blanc des moniteurs qui étaient très à l'écoute."</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
+  <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
+    <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">KT</div>
+    <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Karine & Teepee</div><div style="font-size:.73rem;color:#4a6450;">Croisé border collie berger du Portugal 🐾</div></div>
   </div>
 </div>
     </div>
@@ -474,7 +532,11 @@ footer{background:#0d1a10;padding:3.5rem 2rem 2rem;}
       </div>
       <div class="hov avis-card" data-r="y" data-delay="0.24">
   <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
-  <p style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Club au top, équipe disponible, ambiance sympa — cela complète bien ce que j'apprends de mon côté."</p>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Club au top, équipe disponible, ambiance sympa — cela complète bien ce que j'apprends de mon côté."</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
     <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">EA</div>
     <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Emmanuelle & Aïko</div><div style="font-size:.73rem;color:#4a6450;">Adhérente depuis février 2026 🐾</div></div>
@@ -513,40 +575,62 @@ footer{background:#0d1a10;padding:3.5rem 2rem 2rem;}
       <h2 style="font-size:clamp(1.9rem,3.5vw,2.8rem);font-weight:800;letter-spacing:-.04em;color:#0d1a10;"><span class="sib">Ce qu'ils en disent</span></h2>
       <span style="font-size:.87rem;color:#4a6450;">★ 4,8 / 5 · 11 avis vérifiés</span>
     </div>
-    <div class="grid-4">
-      <div class="hov avis-card" data-r="y" data-delay="0">
+    <div class="carrousel-wrap" style="padding:0 28px;">
+    <button class="carrousel-btn carrousel-prev" id="avis-prev" aria-label="Précédent">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M10 12L6 8l4-4" stroke="#2d6a3f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+    <div style="overflow:hidden;">
+      <div class="carrousel-track" id="avis-track">
+        <div class="hov avis-card" data-r="y" data-delay="0">
   <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
-  <p style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"J'ai eu l'occasion d'assister au cours de découverte pour les chiots avec mon berger australien. Par la suite nous avons continué avec l'obé rythmée. De vrais conseils et un accompagnement plein de générosité."</p>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"J'ai eu l'occasion d'assister au cours de découverte pour les chiots avec mon berger australien. Par la suite nous avons continué avec l'obé rythmée. De vrais conseils et un accompagnement plein de générosité."</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
     <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">CB</div>
     <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Camille B.</div><div style="font-size:.73rem;color:#4a6450;">Berger australien 🐾</div></div>
   </div>
-</div>
       <div class="hov avis-card" data-r="y" data-delay="0.08">
   <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
-  <p style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Ze suis SIBELLE. Mes humains m'ont emmené au club canin depuis mes 3 mois. Z'ai grandi, j'ai 4 ans maintenant, ze suis passée des cours chiots aux ados A et maintenant ze suis dans la cour des grandes ADOS B !"</p>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Ze suis SIBELLE. Mes humains m'ont emmené au club canin depuis mes 3 mois. Z'ai grandi, j'ai 4 ans maintenant, ze suis passée des cours chiots aux ados A et maintenant ze suis dans la cour des grandes ADOS B !"</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
     <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">🐶</div>
     <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Sibelle 🐾</div><div style="font-size:.73rem;color:#4a6450;">Membre depuis 3 mois</div></div>
   </div>
-</div>
       <div class="hov avis-card" data-r="y" data-delay="0.16">
   <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
-  <p style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Cela fait 15 ans que nous évoluons dans ce club avec différents chiens, et nous ne pouvons que le conseiller. Les encadrants sont vraiment impliqués et adorables, ils jouent un rôle essentiel dans le bien-être et l'épanouissement des chiens et de leurs maîtres. Passionnés, patients et à l'écoute, ils mettent leur expérience et leurs compétences au service de chaque binôme. Toujours disponibles pour conseiller, encourager et rassurer les propriétaires, dans une ambiance conviviale et bienveillante. Mon border collie a 3 ans, inscrit au club depuis ses 3 mois, il a franchi toutes les étapes de l'éducation. C'est un tel bonheur de les voir si heureux de se retrouver, impatients de rentrer sur le terrain — toujours dans la bonne humeur communicative. Bref un club à rejoindre sans hésitation !"</p>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Cela fait 15 ans que nous évoluons dans ce club avec différents chiens, et nous ne pouvons que le conseiller. Les encadrants sont vraiment impliqués et adorables, ils jouent un rôle essentiel dans le bien-être et l'épanouissement des chiens et de leurs maîtres. Passionnés, patients et à l'écoute, ils mettent leur expérience et leurs compétences au service de chaque binôme. Toujours disponibles pour conseiller, encourager et rassurer les propriétaires, dans une ambiance conviviale et bienveillante. Mon border collie a 3 ans, inscrit au club depuis ses 3 mois, il a franchi toutes les étapes de l'éducation. C'est un tel bonheur de les voir si heureux de se retrouver, impatients de rentrer sur le terrain — toujours dans la bonne humeur communicative. Bref un club à rejoindre sans hésitation !"</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
     <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">CU</div>
     <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Catherine &amp; Upss</div><div style="font-size:.73rem;color:#4a6450;">Border collie · 15 ans de club 🐾</div></div>
   </div>
-</div>
       <div class="hov avis-card" data-r="y" data-delay="0.24">
   <div style="color:#f59e0b;font-size:.83rem;letter-spacing:2px;">★★★★★</div>
-  <p style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Club au top, équipe disponible, ambiance sympa — cela complète bien ce que j'apprends de mon côté."</p>
+  <p class="avis-txt" style="font-size:.87rem;color:#4a6450;line-height:1.8;flex:1;font-style:italic;">"Club au top, équipe disponible, ambiance sympa — cela complète bien ce que j'apprends de mon côté."</p>
+  <button class="avis-toggle" onclick="toggleAvis(this)">
+    <span class="avis-lbl">Voir plus</span>
+    <svg width="14" height="14" viewBox="0 0 14 14" fill="none"><path d="M3 5l4 4 4-4" stroke="#2d6a3f" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/></svg>
+  </button>
   <div style="display:flex;align-items:center;gap:9px;padding-top:10px;border-top:1px solid #e3ebe4;">
     <div style="width:32px;height:32px;border-radius:50%;background:#eaf4ed;color:#2d6a3f;display:flex;align-items:center;justify-content:center;font-size:.7rem;font-weight:700;flex-shrink:0;">EA</div>
     <div><div style="font-size:.84rem;font-weight:600;color:#0d1a10;">Emmanuelle & Aïko</div><div style="font-size:.73rem;color:#4a6450;">Adhérente depuis février 2026 🐾</div></div>
   </div>
-</div>
+      </div>
     </div>
+    <button class="carrousel-btn carrousel-next" id="avis-next" aria-label="Suivant">
+      <svg width="16" height="16" viewBox="0 0 16 16" fill="none"><path d="M6 12l4-4-4-4" stroke="#2d6a3f" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </button>
+  </div>
   </div>
 </section>
 
@@ -591,6 +675,39 @@ function toggleMenu(){document.querySelector('.nav-mobile').classList.toggle('op
   var cio=new IntersectionObserver(function(e){e.forEach(function(x){if(x.isIntersecting){aC(x.target);cio.unobserve(x.target);}});},{threshold:.35});
   function aC(p){p.querySelectorAll('[data-count]').forEach(function(el){var t=parseFloat(el.dataset.count),pre=el.dataset.prefix||'',suf=el.dataset.suffix||'',isF=t%1!==0,st=null;function step(ts){if(!st)st=ts;var pr=Math.min((ts-st)/1400,1),ease=1-Math.pow(1-pr,4),v=t*ease;el.textContent=pre+(isF?v.toFixed(1):Math.round(v))+suf;if(pr<1)requestAnimationFrame(step);}requestAnimationFrame(step);});}
   document.addEventListener('DOMContentLoaded',function(){document.querySelectorAll('[data-r]').forEach(function(el){io.observe(el);});document.querySelectorAll('[data-cg]').forEach(function(el){cio.observe(el);});document.querySelectorAll('.fq-a').forEach(function(a){a.style.maxHeight='0';a.style.opacity='0';a.style.overflow='hidden';a.style.transition='max-height .38s cubic-bezier(.22,1,.36,1),opacity .3s ease,padding-bottom .3s ease';a.style.paddingBottom='0';a.style.display='block';});});
+})();
+</script>
+
+<script>
+function toggleAvis(btn){
+  var card=btn.closest('.avis-card');
+  card.classList.toggle('expanded');
+  btn.querySelector('.avis-lbl').textContent=card.classList.contains('expanded')?'Voir moins':'Voir plus';
+}
+</script>
+<script>
+(function(){
+  var track=document.getElementById('avis-track');
+  var prev=document.getElementById('avis-prev');
+  var next=document.getElementById('avis-next');
+  if(!track)return;
+  var cards=track.querySelectorAll('.avis-card');
+  var total=cards.length;
+  var current=0;
+  var perView=window.innerWidth<=768?1:3;
+
+  function getPerView(){return window.innerWidth<=768?1:3;}
+  function update(){
+    perView=getPerView();
+    var cardW=cards[0].offsetWidth+14;
+    track.style.transform='translateX(-'+(current*cardW)+'px)';
+    prev.disabled=current===0;
+    next.disabled=current>=total-perView;
+  }
+  prev.addEventListener('click',function(){if(current>0){current--;update();}});
+  next.addEventListener('click',function(){if(current<total-getPerView()){current++;update();}});
+  window.addEventListener('resize',function(){current=0;update();});
+  update();
 })();
 </script>
 </body>
